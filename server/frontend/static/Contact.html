@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Contact Us - Best Cars</title>
     <!-- Link your CSS files here -->
-    <link rel="stylesheet" href="style.css" />  <!-- common styles -->
-    <link rel="stylesheet" href="contact.css" /> <!-- contact page styles -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'contact.css' %}">
+    
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <ul>
-            <li><a href="Home.html">Home</a></li>
-            <li><a href="About.html">About Us</a></li>
-            <li><a href="Contact.html" class="active">Contact Us</a></li>
+            <li><a href="/Home.html">Home</a></li>
+            <li><a href="/About.html">About Us</a></li>
+            <li><a href="/Contact.html" class="active">Contact Us</a></li>
         </ul>
     </nav>
 

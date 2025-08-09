@@ -124,3 +124,20 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.contact-info h2 {
+    color: #004080;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info p {
+    margin: 0.3rem 0;
+}
+
