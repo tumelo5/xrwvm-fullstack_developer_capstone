@@ -83,14 +83,26 @@ def registration(request):
         data = {"userName":username,"error":"Already Registered"}
         return JsonResponse(data)
 
-# # Update the `get_dealerships` view to render the index page with
+# Update the `get_dealerships` view to render the index page with
+import json
+from django.http import JsonResponse
+
 def get_dealerships(request, state="All"):
-    if(state == "All"):
+    if state == "All":
         endpoint = "/fetchDealers"
     else:
-        endpoint = "/fetchDealers/"+state
+        endpoint = f"/fetchDealers/{state}"
+    
     dealerships = get_request(endpoint)
-    return JsonResponse({"status":200,"dealers":dealerships})
+
+    # Parse JSON if still string
+    if isinstance(dealerships, str):
+        dealerships = json.loads(dealerships)
+
+    # Don’t rename fields, just return as-is
+    return JsonResponse({"status": 200, "dealers": dealerships})
+
+
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 def get_dealer_reviews(request, dealer_id):
