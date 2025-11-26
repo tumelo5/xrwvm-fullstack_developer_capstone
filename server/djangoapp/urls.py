@@ -24,7 +24,10 @@ urlpatterns = [
     # path for logout request
     path('logout/', view=views.logout_request, name='logout'),
     
-    #path for get_deaker_id
+    # path for get_deaker_id
     path(route='dealer/<int:dealer_id>', view=views.get_dealer_details, name='dealer_details'),
+
+    # path for get_cars
+    path(route='get_cars', view=views.get_cars, name ='getcars'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
