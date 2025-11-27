@@ -86,9 +86,7 @@ def registration(request):
         return JsonResponse(data)
 
 # Update the `get_dealerships` view to render the index page with
-import json
-from django.http import JsonResponse
-
+@csrf_exempt
 def get_dealerships(request, state="All"):
     if state == "All":
         endpoint = "/fetchDealers"
@@ -107,6 +105,7 @@ def get_dealerships(request, state="All"):
 
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
+@csrf_exempt
 def get_dealer_reviews(request, dealer_id):
     # if dealer id has been provided
     if(dealer_id):
@@ -121,6 +120,7 @@ def get_dealer_reviews(request, dealer_id):
         return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
+@csrf_exempt
 def get_dealer_details(request, dealer_id):
     if(dealer_id):
         endpoint = "/fetchDealer/"+str(dealer_id)
@@ -130,6 +130,7 @@ def get_dealer_details(request, dealer_id):
         return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `add_review` view to submit a review
+@csrf_exempt
 def add_review(request):
     if(request.user.is_anonymous == False):
         data = json.loads(request.body)
@@ -143,6 +144,7 @@ def add_review(request):
 
 
 # Gets the list of cars
+@csrf_exempt
 def get_cars(request):
     # Populate DB only if CarModel table is empty
     if CarModel.objects.count() == 0:
@@ -158,3 +160,15 @@ def get_cars(request):
         })
     
     return JsonResponse({"CarModels": cars})
+
+
+
+#Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
+@csrf_exempt
+def get_dealerships(request, state="All"):
+    if(state == "All"):
+        endpoint = "/fetchDealers"
+    else:
+        endpoint = "/fetchDealers/"+state
+    dealerships = get_request(endpoint)
+    return JsonResponse({"status":200,"dealers":dealerships})
